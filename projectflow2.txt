@@ -1,0 +1,39 @@
+1. Create python virtual env.
+2. Install airflow using {cmd: $ pip install "apache-airflow[celery]==3.0.0" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-3.0.0/constraints-3.9.txt" }
+3. copy all this in rood directory {cmd: export AIRFLOW_HOME=.}
+4. Initialize db for airflow {cmd: $ airflow db migrate }
+5. verify database {cmd: cd ~/airflow} {cmd: ls (output: airflow.cfg airflow.db)} should show output.
+6. create usser {cmd: airflow users create --username admin --password your_password --firstname your_first_name --lastname your_last_name --role Admin --email your_email@some.com}
+OR create airflow user {cmd: airflow standalone}. Or can start using {cmd: ./start_airflow.sh }
+    - initializes the DB
+    - Creates a default admin user
+    - Starts the webserver and scheduler
+
+6. to trigger dag for dataingestion {cmd: $ airflow dags trigger gdrive_data_pipeline }
+
+
+    
+airflow db migrate
+
+airflow users create \
+    --username admin \
+    --firstname bharat \
+    --lastname ameria \
+    --role Admin \
+    --email bharataameriya@gmail.com
+
+airflow api-server --port 9090
+
+airflow scheduler
+
+airflow dag-processor
+
+airflow triggerer
+
+
+1. python3.11 -m venv airflow_venv
+source airflow_venv/bin/activate
+2. export AIRFLOW_HOME=~/airflow
+3. pip install "apache-airflow[postgres,celery,redis]==2.8.1" --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.8.1/constraints-3.11.txt"
+4. in airflow.cfg file replace xcom_backend = airflow.sdk.execution_time.xcom.BaseXCom with xcom_backend = airflow.models.xcom.BaseXCom
+5. in airflow.cfg file replace auth_manager = airflow.api_fastapi.auth.managers.simple.simple_auth_manager.SimpleAuthManager with auth_manager = airflow.www.security.AirflowSecurityManager

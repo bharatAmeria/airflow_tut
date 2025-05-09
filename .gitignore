@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+airflow.db
+airflow.cfg
+logs/
+*.pyc
+__pycache__/
+.env
+airflow_venv/
