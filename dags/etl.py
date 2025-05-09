@@ -1,7 +1,7 @@
 import sys
 import json
 from airflow import DAG
-from airflow.operators.bash_operator import BashOperator
+from airflow.operators.python import PythonOperator
 from datetime import datetime
 from src.logger import logging
 from src.exception import MyException
